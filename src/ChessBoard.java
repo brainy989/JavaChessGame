@@ -2,8 +2,23 @@ public class ChessBoard {
     private Piece[][] board;
 
     public ChessBoard() {
-        this.board = new Piece[8][8];
+        this.board = new Piece[8][8];   // Chessboard is 8x8
         setupPieces();
+    }
+
+    public Piece[][] getBoard() {
+        return board;
+    }
+
+    public Piece getPiece(int row, int column) {
+        return board[row][column];
+    }
+
+    public void setPiece(int row, int column, Piece piece) {
+        board[row][column] = piece;
+        if (piece != null) {
+            piece.setPosition(new Position(row, column));
+        }
     }
 
     private void setupPieces() {
@@ -33,14 +48,6 @@ public class ChessBoard {
             board[1][i] = new Pawn(PieceColor.BLACK, new Position(1, i));
             board[6][i] = new Pawn(PieceColor.WHITE, new Position(6, i));
         }
-    }
-
-    public Piece getPiece(int row, int column) {
-        return board[row][column];
-    }
-
-    public Piece[][] getBoard() {
-        return board;
     }
 
     public void movePiece(Position start, Position end) {
